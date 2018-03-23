@@ -1,0 +1,43 @@
+{
+    "name": "allivcorp/iamport",
+    "description": "I'mport; REST API module for Laravel",
+    "keywords": [
+        "laravel",
+        "iamport"
+    ],
+    "homepage": "https://www.alliv.co.kr",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daeyeol Ryu",
+            "email": "dy.ryu@alliv.co.kr"
+        },
+        {
+            "name": "Jinman Lee",
+            "email": "jinman.lee@alliv.co.kr"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "require-dev": {
+      "illuminate/support": ">=5.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Alliv\\Iamport\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Alliv\\Iamport\\IamportServiceProvider"
+            ],
+            "aliases": {
+                "Iamport": "Alliv\\Iamport\\Facades\\IamportFacade"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
