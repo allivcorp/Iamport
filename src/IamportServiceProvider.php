@@ -26,10 +26,18 @@ class IamportServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(Iamport::class, function () {
+        $this->app->bind('iamport', function () {
             return new Iamport(config('iamport'));
         });
+    }
 
-        $this->app->alias(Iamport::class, 'iamport');
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['iamport'];
     }
 }
