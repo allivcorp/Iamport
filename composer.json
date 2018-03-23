@@ -5,7 +5,7 @@
         "laravel",
         "iamport"
     ],
-    "homepage": "https://www.alliv.co.kr",
+    "homepage": "https://github.com/allivcorp/iamport",
     "license": "MIT",
     "authors": [
         {
@@ -17,7 +17,6 @@
             "email": "jinman.lee@alliv.co.kr"
         }
     ],
-    "version": "1.0.1",
     "require": {
         "php": ">=7.0.0"
     },
@@ -26,7 +25,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Alliv\\Iamport\\": "src"
+            "Alliv\\Iamport\\": "src/"
         }
     },
     "extra": {

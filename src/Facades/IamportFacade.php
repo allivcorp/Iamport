@@ -12,8 +12,6 @@ class IamportFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        self::clearResolvedInstance('iamport');
-
         return 'iamport';
     }
 }

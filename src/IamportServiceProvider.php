@@ -14,11 +14,11 @@ class IamportServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        $this->mergeConfigFrom(__DIR__ . '/../config/iamport.php', 'iamport');
+
         $this->publishes([
             __DIR__ . '/../config/iamport.php' => config_path('iamport.php')
         ]);
-
-        $this->mergeConfigFrom(__DIR__ . '/../config/iamport.php', 'iamport');
     }
 
     /**
@@ -26,22 +26,10 @@ class IamportServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('iamport', function ($app) {
-            $config = $app->make('config')->get('iamport');
-
-            return new Iamport($config);
+        $this->app->singleton(Iamport::class, function () {
+            return new Iamport(config('iamport'));
         });
 
         $this->app->alias(Iamport::class, 'iamport');
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return ['iamport'];
     }
 }
