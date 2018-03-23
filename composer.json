@@ -17,7 +17,7 @@
             "email": "jinman.lee@alliv.co.kr"
         }
     ],
-    "version": "1.0.0",
+    "version": "1.0.1",
     "require": {
         "php": ">=7.0.0"
     },
