@@ -4,11 +4,10 @@ php:
   - 7.0
   - 7.1
 
+branches:
+  only:
+    - master
+
 sudo: false
 
-before_install:
-    - travis_retry composer self-update
-
-install: travis_retry composer install --no-interaction --prefer-source --dev
-
-script: vendor/bin/phpunit
+install: travis_retry composer update --no-interaction --prefer-source
