@@ -18,15 +18,20 @@
         }
     ],
     "require": {
-        "php": ">=7.0.0"
+        "php": ">=7.0",
+        "illuminate/support": "^5.5"
     },
     "require-dev": {
-      "illuminate/support": ">=5.0.0",
-        "phpunit/phpunit": "^7.0"
+        "phpunit/phpunit": "^6.5"
     },
     "autoload": {
         "psr-4": {
             "Alliv\\Iamport\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4:": {
+            "Alliv\\Iamport\\Test\\": "tests/"
         }
     },
     "extra": {

@@ -5,6 +5,12 @@ use Exception;
 
 class Iamport
 {
+    const PAYMENT_STATUS_ALL = 'all';               // 전체
+    const PAYMENT_STATUS_READY = 'ready';           // 미결제
+    const PAYMENT_STATUS_PAID = 'paid';             // 결제완료
+    const PAYMENT_STATUS_CANCELLED = 'cancelled';   // 결제취소
+    const PAYMENT_STATUS_FAILED = 'failed';         // 결제실패
+
     /** @var ApiClient */
     private $client;
 
@@ -25,6 +31,25 @@ class Iamport
             $response = $this->client->authRequest('GET', '/payments/' . $impUid);
             $payment = new Payment($response);
             return new Result(true, $payment);
+        } catch (Exception $e) {
+            return new Result(false, null, $e);
+        }
+    }
+
+    /**
+     * 상태별 결제 목록을 확인합니다.
+     *
+     * @param string $status
+     * @param int $page
+     * @param int $limit
+     * @return Result
+     */
+    public function getPayments($status = 'all', $page = 1, $limit = 20)
+    {
+        try {
+            $response = $this->client->authRequest('GET', '/payments/status/' . $status . '?page=' . $page . '&limit=' . $limit);
+            // TODO: 유닛테스트를 위한 임시 API
+            return new Result(true, $response);
         } catch (Exception $e) {
             return new Result(false, null, $e);
         }
