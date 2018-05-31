@@ -62,9 +62,9 @@ Iamport::subscribeAgain('customer_1234', 'merchant_1234', 6000, 'Coffee');
 
 Furthermore information, please refer to [I'mport API](https://api.iamport.kr/).
 
-## TODO
+## TBD
 
-- Use Guzzle
+- Use Guzzle (Working on now. Will be released before July, 2018)
 - Other REST API provided by [I'mport API](https://api.iamport.kr/).
 
 ## License
