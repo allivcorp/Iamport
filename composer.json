@@ -18,7 +18,8 @@
         }
     ],
     "require": {
-        "php": ">=7.1.0"
+        "php": ">=7.1.0",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
         "illuminate/support": "^5.6",
