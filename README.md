@@ -1,6 +1,5 @@
 # Iamport
 
-[![Build Status](https://travis-ci.org/allivcorp/Iamport.svg?branch=master)](https://travis-ci.org/allivcorp/Iamport)
 [![Packagist](https://img.shields.io/packagist/v/allivcorp/iamport.svg)](https://packagist.org/packages/allivcorp/iamport)
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/allivcorp/iamport.svg)](https://packagist.org/packages/allivcorp/iamport)
 [![Packagist](https://img.shields.io/packagist/dt/allivcorp/iamport.svg)](https://packagist.org/packages/allivcorp/iamport)
