@@ -192,4 +192,14 @@ class Iamport
             return new Result(false, null, $e);
         }
     }
+
+    public function getSubscribeCustomer($customerUid)
+    {
+        try {
+            $response = $this->client->authRequest('GET', '/subscribe/customers/' . $customerUid);
+            return new Result(true, $response);
+        } catch (Exception $e) {
+            return new Result(false, null, $e);
+        }
+    }
 }
