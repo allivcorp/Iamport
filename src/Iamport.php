@@ -202,4 +202,14 @@ class Iamport
             return new Result(false, null, $e);
         }
     }
+
+    public function deleteSubscribeCustomer($customerUid)
+    {
+        try {
+            $response = $this->client->authRequest('DELETE', '/subscribe/customers/' . $customerUid);
+            return new Result(true, $response);
+        } catch (Exception $e) {
+            return new Result(false, null, $e);
+        }
+    }
 }
