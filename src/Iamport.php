@@ -190,6 +190,29 @@ class Iamport
     }
 
     /**
+     * @param string $customerUid
+     * @param string[]|null $merchantUid
+     * @return Result
+     */
+    public function subscribeUnschedule($customerUid, $merchantUid = null)
+    {
+        $params = [
+            'customer_uid' => $customerUid,
+        ];
+        if (!empty($merchantUid)) {
+            $params['merchant_uid'] = $merchantUid;
+        }
+
+        try {
+            $response = $this->client->authRequest('POST', '/subscribe/payments/unschedule', $params);
+            $schedules = Schedule::fromArray($response);
+            return new Result(true, $schedules);
+        } catch (Exception $e) {
+            return new Result(false, null, $e);
+        }
+    }
+
+    /**
      * 구매자에 대해 빌링키 발급 및 저장
      *
      * @param $customerUid
