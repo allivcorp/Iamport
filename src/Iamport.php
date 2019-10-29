@@ -173,6 +173,23 @@ class Iamport
     }
 
     /**
+     * 예약 거래주문번호(merchant_uid)로 결제예약정보를 조회
+     *
+     * @param string $mercahntUid
+     * @return Result
+     */
+    public function getSubscribeSchedule($mercahntUid)
+    {
+        try {
+            $response = $this->client->authRequest('GET', '/subscribe/payments/schedule/' . $mercahntUid);
+            $schedule = new Schedule($response);
+            return new Result(true, $schedule);
+        } catch (Exception $e) {
+            return new Result(false, null, $e);
+        }
+    }
+
+    /**
      * 구매자에 대해 빌링키 발급 및 저장
      *
      * @param $customerUid
