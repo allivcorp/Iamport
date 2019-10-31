@@ -9,7 +9,7 @@ class Schedule
     public function __construct($response)
     {
         $this->response = $response;
-        $this->customData = json_decode($response->custom_data);
+        $this->customData = json_decode($response->custom_data ?? '{}');
     }
 
     public function __get($name)
