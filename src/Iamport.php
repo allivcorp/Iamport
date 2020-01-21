@@ -126,6 +126,93 @@ class Iamport
     }
 
     /**
+     * 비인증 결제요청을 미리 예약해두면 아임포트가 자동으로 해당 시간에 맞춰 결제를 진행하는 방식
+     *
+     * @param string $customerUid
+     * @param array $schedules
+     * @param int|null $checkingAmount
+     * @param string|null $cardNumber
+     * @param string|null $expiry
+     * @param string|null $birth
+     * @param string|null $pwd2Digit
+     * @param string|null $pg
+     * @return Result
+     */
+    public function subscribeSchedule($customerUid, $schedules, $checkingAmount = null, $cardNumber = null, $expiry = null, $birth = null, $pwd2Digit = null, $pg = null)
+    {
+        $params = [
+            'customer_uid' => $customerUid,
+            'schedules' => $schedules,
+        ];
+        if (!empty($checkingAmount)) {
+            $params['checking_amount'] = $checkingAmount;
+        }
+        if (!empty($cardNumber)) {
+            $params['card_number'] = $cardNumber;
+        }
+        if (!empty($expiry)) {
+            $params['expiry'] = $expiry;
+        }
+        if (!empty($birth)) {
+            $params['birth'] = $birth;
+        }
+        if (!empty($pwd2Digit)) {
+            $params['pwd_2digit'] = $pwd2Digit;
+        }
+        if (!empty($pg)) {
+            $params['pg'] = $pg;
+        }
+
+        try {
+            $response = $this->client->authRequest('POST', '/subscribe/payments/schedule', $params);
+            $schedules = Schedule::fromArray($response);
+            return new Result(true, $schedules);
+        } catch (Exception $e) {
+            return new Result(false, null, $e);
+        }
+    }
+
+    /**
+     * 예약 거래주문번호(merchant_uid)로 결제예약정보를 조회
+     *
+     * @param string $mercahntUid
+     * @return Result
+     */
+    public function getSubscribeSchedule($mercahntUid)
+    {
+        try {
+            $response = $this->client->authRequest('GET', '/subscribe/payments/schedule/' . $mercahntUid);
+            $schedule = new Schedule($response);
+            return new Result(true, $schedule);
+        } catch (Exception $e) {
+            return new Result(false, null, $e);
+        }
+    }
+
+    /**
+     * @param string $customerUid
+     * @param string[]|null $merchantUid
+     * @return Result
+     */
+    public function subscribeUnschedule($customerUid, $merchantUid = null)
+    {
+        $params = [
+            'customer_uid' => $customerUid,
+        ];
+        if (!empty($merchantUid)) {
+            $params['merchant_uid'] = $merchantUid;
+        }
+
+        try {
+            $response = $this->client->authRequest('POST', '/subscribe/payments/unschedule', $params);
+            $schedules = Schedule::fromArray($response);
+            return new Result(true, $schedules);
+        } catch (Exception $e) {
+            return new Result(false, null, $e);
+        }
+    }
+
+    /**
      * 구매자에 대해 빌링키 발급 및 저장
      *
      * @param $customerUid
@@ -187,6 +274,26 @@ class Iamport
             $response = $this->client->authRequest('DELETE', '/subscribe/customers/' . $customerUid, [
                 'customer_uid' => $customerUid
             ]);
+            return new Result(true, $response);
+        } catch (Exception $e) {
+            return new Result(false, null, $e);
+        }
+    }
+
+    public function getSubscribeCustomer($customerUid)
+    {
+        try {
+            $response = $this->client->authRequest('GET', '/subscribe/customers/' . $customerUid);
+            return new Result(true, $response);
+        } catch (Exception $e) {
+            return new Result(false, null, $e);
+        }
+    }
+
+    public function deleteSubscribeCustomer($customerUid)
+    {
+        try {
+            $response = $this->client->authRequest('DELETE', '/subscribe/customers/' . $customerUid);
             return new Result(true, $response);
         } catch (Exception $e) {
             return new Result(false, null, $e);
